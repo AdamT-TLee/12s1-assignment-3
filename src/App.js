@@ -1,23 +1,40 @@
-import logo from './logo.svg';
-import './App.css';
+import "bootstrap/dist/css/bootstrap.css";
+import "bootstrap-icons/font/bootstrap-icons.css";
+
+import { useState } from "react";
+import {
+  createBrowserRouter,
+  createRoutesFromElements,
+  Route,
+  RouterProvider,
+} from "react-router-dom";
+
+import Browse from "./Browse";
+import Cart from "./Cart";
 
 function App() {
+  const [cart, setCart] = useState([]);
+
+  const router = createBrowserRouter(
+    createRoutesFromElements(
+      <Route path="/">
+        <Route path="" element={<Browse cart={cart} setCart={setCart} />} />
+        <Route path="cart" element={<Cart />} />
+      </Route>
+    )
+  );
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <RouterProvider
+        router={router}
+        // What to show when loading routes
+        fallbackElement={
+          <div className="spinner-border" role="status">
+            <span className="visually-hidden">Loading...</span>
+          </div>
+        }
+      />
     </div>
   );
 }
