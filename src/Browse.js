@@ -57,7 +57,7 @@ function Browse({ cart, setCart }) {
 
     // Filter catalog
     const updatedCatalog = catalog.filter((item) => {
-      if (item.title.toLowerCase().includes(search)) {
+      if (item.title.toLowerCase().includes(search.toLowerCase())) {
         return true;
       }
 
