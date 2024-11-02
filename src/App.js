@@ -19,7 +19,7 @@ function App() {
     createRoutesFromElements(
       <Route path="/">
         <Route path="" element={<Browse cart={cart} setCart={setCart} />} />
-        <Route path="cart" element={<Cart cart={cart}/>}  />
+        <Route path="cart" element={<Cart cart={cart} />} />
       </Route>
     )
   );

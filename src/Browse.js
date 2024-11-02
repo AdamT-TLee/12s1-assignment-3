@@ -15,6 +15,7 @@ function Browse({ cart, setCart }) {
       const data = await response.json();
 
       setCatalog(data);
+      setViewCatalog(data);
       console.log(data);
     };
 
@@ -68,25 +69,51 @@ function Browse({ cart, setCart }) {
   };
 
   const shoppingItems = viewCatalog.map((item) => (
-    <div className="col">
-      <div className="card" key={item.id} style={{ width: "18rem" }}>
-        <img src={item.image} className="card-img-top img-fluid" alt="..." />
+    <div className="col justify-content-center" key={item.id}>
+      <div className="card w-100 h-100">
+        <div className="card-header bg-white">
+          <img
+            src={item.image}
+            className="card-img-top img-fluid p-4 object-fit-contain"
+            style={{ maxHeight: "27rem", minHeight: "27rem" }}
+            alt="..."
+          />
+        </div>
+
         <div className="card-body">
-          <h5 className="card-title">{item.title}</h5>
-          <p className="card-text">{item.description}</p>
-          <input type="number" value={howManyOfThis(item.id)} />
-          <button
-            className="btn btn-outline-success"
-            onClick={() => addToCart(item)}
-          >
-            +
-          </button>
-          <button
-            className="btn btn-outline-success"
-            onClick={() => removeFromCart(item)}
-          >
-            -
-          </button>
+          <h5 className="card-title">
+            <span className="px-2 bg-success rounded-4 text-light">
+              ${item.price}
+            </span>{" "}
+            {item.title}
+          </h5>
+          <hr />
+          <div className="my-3 card-text">{item.description}</div>
+        </div>
+        <div className="card-footer">
+          <div className="input-group align-items-end">
+            <span className="input-group-text">#</span>
+
+            <input
+              type="number"
+              className="form-control"
+              onChange={() => howManyOfThis(item.id)}
+              value={howManyOfThis(item.id)}
+              readOnly
+            />
+            <button
+              className="btn btn-outline-success btn-light"
+              onClick={() => addToCart(item)}
+            >
+              +
+            </button>
+            <button
+              className="btn btn-outline-success btn-light"
+              onClick={() => removeFromCart(item)}
+            >
+              -
+            </button>
+          </div>
         </div>
       </div>
     </div>
@@ -99,17 +126,17 @@ function Browse({ cart, setCart }) {
           <form className="d-flex" onSubmit={filterCatalog}>
             <input
               id="catalogSearch"
+              name="searchInput"
               className="form-control me-2"
               type="search"
               placeholder="Search"
               aria-label="Search"
-              name="searchInput"
             />
             <button className="btn btn-outline-success" type="submit">
               Search
             </button>
           </form>
-          <Link to="/cart" class="btn btn-primary">
+          <Link to="/cart" className="btn btn-primary">
             <i className="bi bi-arrow-right-circle"></i> Checkout
           </Link>
         </div>
@@ -117,8 +144,8 @@ function Browse({ cart, setCart }) {
 
       <div className="container">
         <div
-          className="row row-cols-1 row-cols-md-2 
-                    row-cols-lg-3 g-5 align-content-center"
+          className="mt-4 row row-cols-1 row-cols-md-2 
+                    row-cols-lg-3 g-4"
         >
           {shoppingItems}
         </div>
