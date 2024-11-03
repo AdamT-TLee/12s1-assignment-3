@@ -180,7 +180,9 @@ function Cart({ cart }) {
                 {...register("state", { required: true })}
                 className="form-select"
               >
-                <option selected>Choose...</option>
+                <option value="" disabled selected>
+                  Choose...
+                </option>
                 <option value="AK">Alaska</option>
                 <option value="AL">Alabama</option>
                 <option value="AR">Arkansas</option>
@@ -234,11 +236,6 @@ function Cart({ cart }) {
                 <option value="WV">West Virginia</option>
                 <option value="WY">Wyoming</option>
               </select>
-              {/* <input
-                {...register("state", { required: true })}
-                placeholder="State"
-                className="form-control"
-              /> */}
               {errors.state && (
                 <p className="text-danger">State is required.</p>
               )}
