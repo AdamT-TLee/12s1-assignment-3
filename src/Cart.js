@@ -15,19 +15,17 @@ const schema = yup
       .required("Credit card is required.")
       .transform((value) => value.replace(/[ -]/g, ""))
       .test("isInt", "Invalid credit card.", (value) => !isNaN(value))
-      .test("length", "Invalid credit card.", (num) => num.length === 16),
+      .test("length", "Invalid credit card.", (value) => value.length === 16),
 
     address: yup.string().required("Address is required."),
     address2: yup.string(),
     city: yup.string().required("City is required."),
     state: yup.string().required("State is required."),
     zip: yup
-      .number()
-      .typeError("Invalid ZIP.")
-      .positive("Invalid ZIP.")
-      .integer("Invalid ZIP.")
-      .test("length", "Invalid ZIP.", (zip) => zip.toString().length === 5)
-      .required("ZIP is required."),
+      .string()
+      .required("ZIP is required.")
+      .test("isInt", "Invalid ZIP.", (value) => !isNaN(value))
+      .test("length", "Invalid ZIP.", (value) => value.toString().length === 5),
   })
   .required();
 
@@ -76,7 +74,7 @@ function Cart({ cart, setFormData }) {
         </div>
       </nav>
 
-      <h2 className="container mt-2">Shopping Cart</h2>
+      <h2 className="container mt-4">Shopping Cart</h2>
       {cartItems.length === 0 ? (
         <div className="container">Your cart is empty.</div>
       ) : (
