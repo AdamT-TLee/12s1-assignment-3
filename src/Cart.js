@@ -1,12 +1,41 @@
+import { yupResolver } from "@hookform/resolvers/yup";
 import { useForm } from "react-hook-form";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import * as yup from "yup";
+
+const schema = yup
+  .object({
+    fullName: yup.string().required("Full name is required."),
+    email: yup
+      .string()
+      .required("Email is required")
+      .email("Invalid email address."),
+    creditCard: yup
+      .mixed()
+      .transform((value) => value.replace(/[ -]/g, ""))
+      .test("length", "Invalid credit card.", (num) => num.length === 16)
+      .required("Credit card is required."),
+
+    address: yup.string().required("Address is required."),
+    address2: yup.string(),
+    city: yup.string().required("City is required."),
+    state: yup.string().required("State is required."),
+    zip: yup
+      .number()
+      .typeError("Invalid ZIP.")
+      .positive("Invalid ZIP.")
+      .integer("Invalid ZIP.")
+      .test("length", "Invalid ZIP.", (zip) => zip.toString().length === 5)
+      .required("ZIP is required."),
+  })
+  .required();
 
 function Cart({ cart, setFormData }) {
   const {
     register,
     handleSubmit,
     formState: { errors, isValid },
-  } = useForm({ mode: "onChange" });
+  } = useForm({ mode: "all", resolver: yupResolver(schema) });
 
   // Create an object to track item counts
   const itemCounts = cart.reduce((itemCount, item) => {
@@ -21,17 +50,26 @@ function Cart({ cart, setFormData }) {
   // Convert the object to an array for mapping
   const cartItems = Object.values(itemCounts);
 
-  const onSubmit = (dataF) => {
+  // Handle form submission
+  const navigate = useNavigate();
+  const onSubmit = (dataF, e) => {
+    e.preventDefault();
+
     setFormData(dataF);
     console.log(dataF); // Log all data
     console.log(dataF.fullName); // Log only fullName
+
+    if (cartItems.length != 0) {
+      navigate("/confirmation");
+    }
   };
+  const onError = (errors, e) => console.log(errors, e);
 
   return (
     <div>
       <nav className="navbar navbar-expand navbar-light bg-light">
         <div className="container-fluid">
-          <Link to="/" class="btn btn-secondary">
+          <Link to="/" className="btn btn-secondary">
             <i className="bi bi-arrow-left-circle"></i> Return
           </Link>
         </div>
@@ -71,7 +109,10 @@ function Cart({ cart, setFormData }) {
         </div>
       )}
       <h2 className="container mt-5">Checkout</h2>
-      <form onSubmit={handleSubmit(onSubmit)} className="container">
+      <form
+        onSubmit={handleSubmit(onSubmit, onError)}
+        className="container mb-5"
+      >
         <div className="row">
           <div className="col">
             <label htmlFor="fullNameInput" className="form-label">
@@ -80,12 +121,12 @@ function Cart({ cart, setFormData }) {
             <div className="form-group mb-3">
               <input
                 id="fullNameInput"
-                {...register("fullName", { required: true })}
+                {...register("fullName")}
                 placeholder="John Doe"
                 className="form-control"
               />
               {errors.fullName && (
-                <p className="text-danger">Full Name is required.</p>
+                <p className="text-danger">{errors.fullName?.message}</p>
               )}
             </div>
           </div>
@@ -96,15 +137,12 @@ function Cart({ cart, setFormData }) {
             <div className="form-group mb-3">
               <input
                 id="emailInput"
-                {...register("email", {
-                  required: true,
-                  pattern: /^\S+@\S+$/i,
-                })}
+                {...register("email")}
                 placeholder="example@gmail.com"
                 className="form-control"
               />
               {errors.email && (
-                <p className="text-danger">Email is required.</p>
+                <p className="text-danger">{errors.email?.message}</p>
               )}
             </div>
           </div>
@@ -119,13 +157,21 @@ function Cart({ cart, setFormData }) {
                 <i className="input-group-text bi bi-credit-card-fill"></i>
                 <input
                   id="creditCardInput"
-                  {...register("creditCard", { required: true, minLength: 16})}
+                  {...register("creditCard")}
                   placeholder="XXXX-XXXX-XXXX-XXXX"
                   className="form-control"
+                  maxLength={19}
+                  onChange={(element) => {
+                    let string = element.target.value;
+
+                    let groups = string.replace(/[ -]/g, "").match(/.{1,4}/g);
+
+                    element.target.value = groups ? groups.join(" ") : "";
+                  }}
                 />
               </div>
               {errors.creditCard && (
-                <p className="text-danger">Credit Card is required.</p>
+                <p className="text-danger">{errors.creditCard?.message}</p>
               )}
             </div>
           </div>
@@ -138,12 +184,12 @@ function Cart({ cart, setFormData }) {
             <div className="form-group mb-3">
               <input
                 id="addressInput"
-                {...register("address", { required: true })}
+                {...register("address")}
                 placeholder="1234 Main St"
                 className="form-control"
               />
               {errors.address && (
-                <p className="text-danger">Address is required.</p>
+                <p className="text-danger">{errors.address?.message}</p>
               )}
             </div>
           </div>
@@ -169,10 +215,12 @@ function Cart({ cart, setFormData }) {
             <div className="form-group mb-3">
               <input
                 id="cityInput"
-                {...register("city", { required: true })}
+                {...register("city")}
                 className="form-control"
               />
-              {errors.city && <p className="text-danger">City is required.</p>}
+              {errors.city && (
+                <p className="text-danger">{errors.city?.message}</p>
+              )}
             </div>
           </div>
           <div className="col-2">
@@ -182,10 +230,11 @@ function Cart({ cart, setFormData }) {
             <div className="form-group mb-3">
               <select
                 id="stateInput"
-                {...register("state", { required: true })}
+                {...register("state")}
                 className="form-select"
+                defaultValue=""
               >
-                <option value="" disabled selected>
+                <option value="" disabled>
                   Choose...
                 </option>
                 <option value="AK">Alaska</option>
@@ -242,35 +291,33 @@ function Cart({ cart, setFormData }) {
                 <option value="WY">Wyoming</option>
               </select>
               {errors.state && (
-                <p className="text-danger">State is required.</p>
+                <p className="text-danger">{errors.state?.message}</p>
               )}
             </div>
           </div>
           <div className="col-2">
             <label htmlFor="zipInput" className="form-label">
-              Zip
+              ZIP
             </label>
             <div className="form-group mb-3">
               <input
                 id="zipInput"
-                {...register("zip", { required: true, minLength: 5})}
-                className="form-control" maxLength={5}
+                {...register("zip")}
+                className="form-control"
+                maxLength={5}
               />
-              {errors.zip && <p className="text-danger">Zip is required.</p>}
+              {errors.zip && (
+                <p className="text-danger">{errors.zip?.message}</p>
+              )}
             </div>
           </div>
         </div>
-        <Link to={cartItems.length > 0 && isValid ? "/confirmation" : "#"} onClick={(e) => {
-            if (!isValid || cartItems.length === 0) {
-              e.preventDefault(); // Prevent navigation if the form is not valid
-            } else {
-                handleSubmit(onSubmit)(); // Call the submit handler
-            }
-          }}>
-          <button type="submit" className="btn btn-success mb-3">
-            <i className="bi bi-cart4"></i> Order
-          </button>
-        </Link>
+        <button type="submit" className="btn btn-success">
+          <i className="bi bi-cart4"></i> Order
+        </button>
+        {cartItems.length === 0 && (
+          <p className="text-danger">Cart is empty.</p>
+        )}
       </form>
     </div>
   );
