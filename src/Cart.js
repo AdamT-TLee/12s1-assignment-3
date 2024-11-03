@@ -11,10 +11,11 @@ const schema = yup
       .required("Email is required")
       .email("Invalid email address."),
     creditCard: yup
-      .mixed()
+      .string()
+      .required("Credit card is required.")
       .transform((value) => value.replace(/[ -]/g, ""))
-      .test("length", "Invalid credit card.", (num) => num.length === 16)
-      .required("Credit card is required."),
+      .test("isInt", "Invalid credit card.", (value) => !isNaN(value))
+      .test("length", "Invalid credit card.", (num) => num.length === 16),
 
     address: yup.string().required("Address is required."),
     address2: yup.string(),
