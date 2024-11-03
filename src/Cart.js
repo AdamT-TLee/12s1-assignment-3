@@ -158,7 +158,7 @@ function Cart({ cart, setFormData }) {
                 <input
                   id="creditCardInput"
                   {...register("creditCard")}
-                  placeholder="XXXX-XXXX-XXXX-XXXX"
+                  placeholder="XXXX XXXX XXXX XXXX"
                   className="form-control"
                   maxLength={19}
                   onChange={(element) => {
