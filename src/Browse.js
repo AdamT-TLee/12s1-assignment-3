@@ -65,7 +65,7 @@ function Browse({ cart, setCart, catalog }) {
             src={item.image.url}
             className="card-img-top img-fluid object-fit-contain p-2"
             style={{ maxHeight: "24rem"}}
-            alt={`Image of ${data.name}, ${data.image.author}\nSource: ${data.image.source}`}
+            alt={`Image of ${item.name}, ${item.image.author}\nSource: ${item.image.source}`}
           />
         </div>
 
