@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 
-function Browse({ cart, setCart, catalog}) {
+function Browse({ cart, setCart, catalog }) {
   // Products data of currently displayed products
   const [viewCatalog, setViewCatalog] = useState([]);
 
@@ -37,16 +37,7 @@ function Browse({ cart, setCart, catalog}) {
   };
 
   // Updates the cards based on the search filter
-  const filterCatalog = (e) => {
-    // Prevent the browser from reloading the page
-    e.preventDefault();
-
-    // Get search input value
-    const formData = new FormData(e.target);
-    const formJSON = Object.fromEntries(formData.entries());
-
-    const search = formJSON.searchInput;
-
+  const filterCatalog = (search) => {
     // Filter catalog
     const updatedCatalog = catalog.filter((item) => {
       if (item.title.toLowerCase().includes(search.toLowerCase())) {
@@ -116,7 +107,7 @@ function Browse({ cart, setCart, catalog}) {
     <div>
       <nav className="navbar navbar-expand navbar-light bg-light">
         <div className="container-fluid">
-          <form className="d-flex" onSubmit={filterCatalog}>
+          <div className="d-flex">
             <input
               id="catalogSearch"
               name="searchInput"
@@ -124,11 +115,9 @@ function Browse({ cart, setCart, catalog}) {
               type="search"
               placeholder="Search"
               aria-label="Search"
+              onInput={e => {filterCatalog(e.target.value)}}
             />
-            <button className="btn btn-outline-success" type="submit">
-              Search
-            </button>
-          </form>
+          </div>
           <Link to="/cart" className="btn btn-primary">
             <i className="bi bi-arrow-right-circle"></i> Checkout
           </Link>
