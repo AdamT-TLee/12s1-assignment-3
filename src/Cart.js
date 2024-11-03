@@ -1,12 +1,12 @@
 import { useForm } from "react-hook-form";
 import { Link } from "react-router-dom";
 
-function Cart({ cart }) {
+function Cart({ cart, setFormData }) {
   const {
     register,
     handleSubmit,
-    formState: { errors },
-  } = useForm();
+    formState: { errors, isValid },
+  } = useForm({ mode: "onChange" });
 
   // Create an object to track item counts
   const itemCounts = cart.reduce((itemCount, item) => {
@@ -21,9 +21,10 @@ function Cart({ cart }) {
   // Convert the object to an array for mapping
   const cartItems = Object.values(itemCounts);
 
-  const onSubmit = (data) => {
-    console.log(data); // Log all data
-    console.log(data.fullName); // Log only fullName
+  const onSubmit = (dataF) => {
+    setFormData(dataF);
+    console.log(dataF); // Log all data
+    console.log(dataF.fullName); // Log only fullName
   };
 
   return (
@@ -118,7 +119,7 @@ function Cart({ cart }) {
                 <i className="input-group-text bi bi-credit-card-fill"></i>
                 <input
                   id="creditCardInput"
-                  {...register("creditCard", { required: true })}
+                  {...register("creditCard", { required: true, minLength: 16})}
                   placeholder="XXXX-XXXX-XXXX-XXXX"
                   className="form-control"
                 />
@@ -252,17 +253,22 @@ function Cart({ cart }) {
             <div className="form-group mb-3">
               <input
                 id="zipInput"
-                {...register("zip", { required: true })}
-                className="form-control"
+                {...register("zip", { required: true, minLength: 5})}
+                className="form-control" maxLength={5}
               />
               {errors.zip && <p className="text-danger">Zip is required.</p>}
             </div>
           </div>
         </div>
-
-        <button type="submit" className="btn btn-success mb-3">
-          <i className="bi bi-cart4"></i> Order
-        </button>
+        <Link to={isValid ? "/confirmation" : "#"} onClick={(e) => {
+            if (!isValid) {
+              e.preventDefault(); // Prevent navigation if the form is not valid
+            }
+          }}>
+          <button type="submit" className="btn btn-success mb-3">
+            <i className="bi bi-cart4"></i> Order
+          </button>
+        </Link>
       </form>
     </div>
   );

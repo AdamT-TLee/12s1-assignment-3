@@ -127,7 +127,7 @@ function Browse({ cart, setCart, catalog }) {
       <div className="container">
         <div
           className="mt-4 row row-cols-1 row-cols-md-2 
-                    row-cols-lg-3 g-4"
+                    row-cols-lg-3 g-4 mb-3"
         >
           {shoppingItems}
         </div>
