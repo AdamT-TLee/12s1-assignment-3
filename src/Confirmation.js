@@ -29,7 +29,7 @@ function Confirmation({cart, dataF, clearCart }) {
             <h2>Order Confirmation</h2>
             <p><strong>Name:</strong> {dataF?.fullName}</p>
             <p><strong>Email:</strong> {dataF?.email}</p>
-            <p><strong>Credit Card:</strong>{`XXXX-XXXX-XXXX-${dataF?.creditCard.slice(-4)}`}</p>
+            <p><strong>Credit Card:</strong> {`XXXX-XXXX-XXXX-${dataF?.creditCard.slice(-4)}`}</p>
             <p><strong>Address:</strong> {dataF?.address}</p>
             <p><strong>Address 2:</strong> {dataF?.address2}</p>
             <p><strong>City:</strong> {dataF?.city}</p>
