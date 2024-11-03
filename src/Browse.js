@@ -38,12 +38,13 @@ function Browse({ cart, setCart, catalog }) {
 
   // Updates the cards based on the search filter
   const filterCatalog = (search) => {
-    
     // Filter catalog
     const searchTerms = search.trim().split(" ");
     const updatedCatalog = catalog.filter((item) => {
       for (let term of searchTerms) {
-        if (!item.title.toLowerCase().trim().includes(term.toLowerCase().trim())) {
+        if (
+          !item.title.toLowerCase().trim().includes(term.toLowerCase().trim())
+        ) {
           return false;
         }
       }
@@ -119,7 +120,9 @@ function Browse({ cart, setCart, catalog }) {
               type="search"
               placeholder="Search"
               aria-label="Search"
-              onInput={e => {filterCatalog(e.target.value)}}
+              onInput={(e) => {
+                filterCatalog(e.target.value);
+              }}
             />
           </div>
           <Link to="/cart" className="btn btn-primary">
