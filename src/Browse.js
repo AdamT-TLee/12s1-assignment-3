@@ -40,7 +40,7 @@ function Browse({ cart, setCart, catalog }) {
   const filterCatalog = (search) => {
     // Filter catalog
     const updatedCatalog = catalog.filter((item) => {
-      if (item.title.toLowerCase().includes(search.toLowerCase())) {
+      if (item.title.toLowerCase().trim().includes(search.toLowerCase().trim())) {
         return true;
       }
 
