@@ -30,14 +30,16 @@ function App() {
     fetchData();
   }, []);
 
-  console.log(formData);
+  const clearCart = () => {
+    setCart([]); // Clear the cart
+  };
 
   const router = createBrowserRouter(
     createRoutesFromElements(
       <Route path="/">
         <Route path="" element={<Browse cart={cart} setCart={setCart} catalog={catalog}/>} />
         <Route path="cart" element={<Cart cart={cart} setFormData={setFormData}/>} />
-        <Route path="confirmation" element={<Confirmation cart={cart} dataF={formData} />} />
+        <Route path="confirmation" element={<Confirmation cart={cart} dataF={formData} clearCart={clearCart}/>} />
       </Route>
     )
   );

@@ -260,9 +260,11 @@ function Cart({ cart, setFormData }) {
             </div>
           </div>
         </div>
-        <Link to={isValid ? "/confirmation" : "#"} onClick={(e) => {
-            if (!isValid) {
+        <Link to={cartItems.length > 0 && isValid ? "/confirmation" : "#"} onClick={(e) => {
+            if (!isValid || cartItems.length === 0) {
               e.preventDefault(); // Prevent navigation if the form is not valid
+            } else {
+                handleSubmit(onSubmit)(); // Call the submit handler
             }
           }}>
           <button type="submit" className="btn btn-success mb-3">
