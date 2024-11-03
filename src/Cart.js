@@ -109,20 +109,24 @@ function Cart({ cart }) {
           </div>
         </div>
         <div className="row">
-          <label htmlFor="creditCardInput" className="form-label">
-            Credit Card
-          </label>
-          <div className="form-group input-group mb-3">
-            <i className="input-group-text bi bi-credit-card-fill"></i>
-            <input
-              id="creditCardInput"
-              {...register("creditCard", { required: true })}
-              placeholder="XXXX-XXXX-XXXX-XXXX"
-              className="form-control"
-            />
-            {errors.creditCard && (
-              <p className="text-danger">Credit Card is required.</p>
-            )}
+          <div className="col">
+            <label htmlFor="creditCardInput" className="form-label">
+              Credit Card
+            </label>
+            <div className="form-group mb-3">
+              <div className="input-group">
+                <i className="input-group-text bi bi-credit-card-fill"></i>
+                <input
+                  id="creditCardInput"
+                  {...register("creditCard", { required: true })}
+                  placeholder="XXXX-XXXX-XXXX-XXXX"
+                  className="form-control"
+                />
+              </div>
+              {errors.creditCard && (
+                <p className="text-danger">Credit Card is required.</p>
+              )}
+            </div>
           </div>
         </div>
         <div className="row">
