@@ -33,7 +33,7 @@ function Cart({ cart, setFormData }) {
   const {
     register,
     handleSubmit,
-    formState: { errors, isValid },
+    formState: { errors},
   } = useForm({ mode: "all", resolver: yupResolver(schema) });
 
   // Create an object to track item counts
@@ -58,7 +58,7 @@ function Cart({ cart, setFormData }) {
     console.log(dataF); // Log all data
     console.log(dataF.fullName); // Log only fullName
 
-    if (cartItems.length != 0) {
+    if (cartItems.length !== 0) {
       navigate("/confirmation");
     }
   };
