@@ -70,10 +70,10 @@ function Confirmation({ cart, dataF, clearCart }) {
                   <div>
                     <img
                       src={item.image.url}
-                      alt={item.title}
+                      alt={item.name}
                       style={{ width: "100px", marginRight: "10px" }}
                     />
-                    <strong>{item.title}</strong> - ${item.price} x{" "}
+                    <strong>{item.name}</strong> - ${item.price} x{" "}
                     {item.quantity} = ${item.price * item.quantity}
                   </div>
                 </li>
