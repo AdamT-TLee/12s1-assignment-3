@@ -87,7 +87,7 @@ function Cart({ cart, setFormData }) {
               >
                 <div>
                   <img
-                    src={item.image}
+                    src={item.image.url}
                     alt={item.title}
                     style={{ width: "100px", marginRight: "10px" }}
                   />
