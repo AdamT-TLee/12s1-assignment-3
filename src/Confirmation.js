@@ -31,7 +31,7 @@ function Confirmation({cart, dataF, clearCart }) {
             <p><strong>Email:</strong> {dataF?.email}</p>
             <p><strong>Credit Card:</strong> {`XXXX-XXXX-XXXX-${dataF?.creditCard.slice(-4)}`}</p>
             <p><strong>Address:</strong> {dataF?.address}</p>
-            <p><strong>Address 2:</strong> {dataF?.address2}</p>
+            {dataF.address2 && <p><strong>Address 2:</strong> {dataF?.address2}</p>}
             <p><strong>City:</strong> {dataF?.city}</p>
             <p><strong>State:</strong> {dataF?.state}</p>
             <p><strong>Zip:</strong> {dataF?.zip}</p>
