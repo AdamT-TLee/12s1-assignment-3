@@ -34,7 +34,11 @@ function Confirmation({ cart, dataF, clearCart }) {
           <strong>Email:</strong> {dataF?.email}
         </p>
         <p>
-          <strong>Credit Card:</strong> {dataF?.creditCard.replace(/\d(?=\d{4})/g, "*").match(/.{1,4}/g).join(" ")}
+          <strong>Credit Card:</strong>{" "}
+          {dataF?.creditCard
+            .replace(/\d(?=\d{4})/g, "*")
+            .match(/.{1,4}/g)
+            .join(" ")}
         </p>
         <p>
           <strong>Address:</strong> {dataF?.address}
