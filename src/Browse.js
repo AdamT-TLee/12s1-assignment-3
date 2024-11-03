@@ -61,7 +61,7 @@ function Browse({ cart, setCart, catalog }) {
       <div className="card w-100 h-100">
         <div className="card-header bg-white">
           <img
-            src={item.image}
+            src={item.image.url}
             className="card-img-top img-fluid p-4 object-fit-contain"
             style={{ maxHeight: "27rem", minHeight: "27rem" }}
             alt="..."

@@ -21,7 +21,7 @@ function App() {
   // Get product data on first render
   useEffect(() => {
     const fetchData = async () => {
-      const response = await fetch("https://fakestoreapi.com/products");
+      const response = await fetch("./data.json");
       const data = await response.json();
 
       setCatalog(data);

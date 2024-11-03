@@ -1,0 +1,93 @@
+[
+  {
+    "id": 1,
+    "name": "Titan submersible",
+    "description": "The Titan submersible, by OceanGate, was designed for deep-sea exploration, including reaching the Titanic wreck at 12,500 feet. Built from carbon fiber and titanium, it carried five people with a forward-facing viewport. In June 2023, it tragically imploded during a dive to the Titanic, resulting in the loss of all onboard.",
+    "image": {
+      "url": "/images/Titan_submersible.jpg",
+      "author": "Becky Kagan Schott, OceanGate",
+      "source": "https://oceangateexpeditions.com/submersibles/"
+    },
+    "price": 250000,
+    "year": "2023",
+    "link": null
+  },
+  {
+    "id": 2,
+    "name": "Google Glass",
+    "description": "Google Glass is a wearable device with a small display near the eye, offering hands-free interaction through a camera, touchpad, and sensors, used for augmented reality in professional and industrial applications.",
+    "image": {
+      "url": "/images/Google_Glass_photo.JPG",
+      "author": "Dan Leveille",
+      "source": "twitter.com/danlev"
+    },
+    "price": 1200,
+    "year": "2014",
+    "link": "https://www.ebay.com/itm/364750089541"
+  },
+  {
+    "id": 3,
+    "name": "Rabbit R1",
+    "image": {
+      "url": "images/gear-r1_USB-C_SIM.webp",
+      "author": "Rabbit AI",
+      "source": "https://www.wired.com/story/rabbit-r1/"
+    },
+    "description": "Rabbit R1 is a compact AI assistant that uses voice commands and a touchscreen to help you with tasks like answering questions, setting reminders, and controlling smart home devices.",
+    "price": 200,
+    "year": "2024",
+    "link": "https://www.rabbit.tech/rabbit-r1"
+  },
+  {
+    "id": 4,
+    "name": "Ouya",
+    "image": {
+      "url": "images/OUYA-Console-set-h.jpg",
+      "author": "Evan-Amos",
+      "source": "https://commons.wikimedia.org/wiki/File:OUYA-Console-set-h.jpg"
+    },
+    "description": "Ouya is an Android-based gaming console released in 2013, designed for affordable gaming and open development. It offered access to indie and mobile games but struggled to maintain traction in the competitive market.",
+    "price": 200,
+    "year": "2013",
+    "link": "https://www.ebay.com/itm/324089762352?chn=ps&mkevt=1&mkcid=28&srsltid=AfmBOoqX-3OXhhblhAf70GKP1vxZLaZuk-cUIZVx6DjzLi4Msxu0Bx1j_ZI"
+  },
+  {
+    "id": 5,
+    "name": "Nintendo Virtual Boy",
+    "image": {
+      "url": "images/Virtual-Boy-Set.jpg",
+      "author": "Evan-Amos",
+      "source": "https://commons.wikimedia.org/wiki/File:Virtual-Boy-Set.jpg"
+    },
+    "description": "Virtual Boy is a 1995 handheld gaming console by Nintendo that featured 3D graphics using stereoscopic technology. Despite its innovative design, it was criticized for discomfort during use and limited game selection, leading to poor sales and a short lifespan.",
+    "price": 1099,
+    "year": "1995",
+    "link": "https://retrogamingofdenver.com/products/virtual-boy-console-bundle-japan-import-virtual-boy?variant=45383570522353&currency=USD&utm_medium=product_sync&utm_source=google&utm_content=sag_organic&utm_campaign=sag_organic&srsltid=AfmBOoqqGCHIeagSD_EIAhKWfao9QdPvLb1zk5JiXjDlwQ17PyO8P56IKiw"
+  },
+  {
+    "id": 6,
+    "name": "Humane AI Pin",
+    "image": {
+      "url": "images/ai-pin-lunar-front.webp",
+      "author": "Humane AI",
+      "source": "https://humane.com/shop"
+    },
+    "description": "The Humane AI Pin is a wearable device designed to provide an intuitive, hands-free AI experience. It features a minimalist design, enabling users to interact with AI through voice commands and gestures. The device aims to enhance daily tasks and communication while integrating seamlessly into users' lifestyles.",
+    "price": 699,
+    "year": "2024",
+    "link": "https://humane.com/shop"
+  },
+  {
+    "id": 7,
+    "name": "Windows Phone",
+    "image": {
+      "url": "images/WP8.1_Start_Screen.png",
+      "author": "Microsoft Corporation",
+      "source": "http://blogs.windows.com/windows_phone/b/windowsphone/archive/2014/04/02/cortana-yes-and-many-many-other-great-features-coming-in-windows-phone-8-1.aspx"
+    },
+    "description": "Windows Phone is a mobile operating system developed by Microsoft, launched in 2010. It featured a unique tile-based user interface and integrated Microsoft services like Office and OneDrive. Despite initial promise, it struggled with app availability and market share, leading to its eventual discontinuation in 2017.",
+    "price": 188,
+    "year": "2010",
+    "link": "https://www.amazon.com/HTC-8X-Black-Verizon-Wireless/dp/B00A7F5P6W?source=ps-sl-shoppingads-lpcontext&ref_=fplfs&psc=1&smid=ATVPDKIKX0DER"
+  }
+]
