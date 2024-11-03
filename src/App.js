@@ -17,7 +17,7 @@ function App() {
   const [catalog, setCatalog] = useState([]);
   const [cart, setCart] = useState([]);
   const [formData, setFormData] = useState({});
-  
+
   // Get product data on first render
   useEffect(() => {
     const fetchData = async () => {
@@ -37,9 +37,20 @@ function App() {
   const router = createBrowserRouter(
     createRoutesFromElements(
       <Route path="/">
-        <Route path="" element={<Browse cart={cart} setCart={setCart} catalog={catalog}/>} />
-        <Route path="cart" element={<Cart cart={cart} setFormData={setFormData}/>} />
-        <Route path="confirmation" element={<Confirmation cart={cart} dataF={formData} clearCart={clearCart}/>} />
+        <Route
+          path=""
+          element={<Browse cart={cart} setCart={setCart} catalog={catalog} />}
+        />
+        <Route
+          path="cart"
+          element={<Cart cart={cart} setFormData={setFormData} />}
+        />
+        <Route
+          path="confirmation"
+          element={
+            <Confirmation cart={cart} dataF={formData} clearCart={clearCart} />
+          }
+        />
       </Route>
     )
   );
