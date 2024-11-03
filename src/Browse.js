@@ -38,13 +38,17 @@ function Browse({ cart, setCart, catalog }) {
 
   // Updates the cards based on the search filter
   const filterCatalog = (search) => {
+    const searchTerms = search.trim().split(" ");
+    console.log(searchTerms);
     // Filter catalog
     const updatedCatalog = catalog.filter((item) => {
-      if (item.title.toLowerCase().trim().includes(search.toLowerCase().trim())) {
-        return true;
+      for (let term of searchTerms) {
+        if (!item.title.toLowerCase().trim().includes(term.toLowerCase().trim())) {
+          return false;
+        }
       }
 
-      return false;
+      return true;
     });
 
     // Update catalog
