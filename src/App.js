@@ -1,7 +1,7 @@
 import "bootstrap/dist/css/bootstrap.css";
 import "bootstrap-icons/font/bootstrap-icons.css";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import {
   createBrowserRouter,
   createRoutesFromElements,
@@ -13,12 +13,25 @@ import Browse from "./Browse";
 import Cart from "./Cart";
 
 function App() {
+  const [catalog, setCatalog] = useState([]);
   const [cart, setCart] = useState([]);
+  
+  // Get product data on first render
+  useEffect(() => {
+    const fetchData = async () => {
+      const response = await fetch("https://fakestoreapi.com/products");
+      const data = await response.json();
+
+      setCatalog(data);
+      console.log(data);
+    };
+    fetchData();
+  }, []);
 
   const router = createBrowserRouter(
     createRoutesFromElements(
       <Route path="/">
-        <Route path="" element={<Browse cart={cart} setCart={setCart} />} />
+        <Route path="" element={<Browse cart={cart} setCart={setCart} catalog={catalog}/>} />
         <Route path="cart" element={<Cart cart={cart} />} />
       </Route>
     )

@@ -1,31 +1,21 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 
-function Browse({ cart, setCart }) {
-  // Product data
-  const [catalog, setCatalog] = useState([]);
-
+function Browse({ cart, setCart, catalog}) {
   // Products data of currently displayed products
   const [viewCatalog, setViewCatalog] = useState([]);
 
-  // Get product data on first render
+  // Load initial cards from catalog data
   useEffect(() => {
-    const fetchData = async () => {
-      const response = await fetch("https://fakestoreapi.com/products");
-      const data = await response.json();
+    setViewCatalog(catalog);
+  }, [catalog]);
 
-      setCatalog(data);
-      setViewCatalog(data);
-      console.log(data);
-    };
-
-    fetchData();
-  }, []);
-
+  // Adds an item to the cart
   const addToCart = (item) => {
     setCart([...cart, item]);
   };
 
+  // Removes product from cart
   const removeFromCart = (item) => {
     let itemFound = false;
     const updatedCart = cart.filter((cartItem) => {
@@ -40,11 +30,13 @@ function Browse({ cart, setCart }) {
     }
   };
 
+  // Returns number of item in cart given an item id
   const howManyOfThis = (id) => {
     let hmot = cart.filter((cartItem) => cartItem.id === id);
     return hmot.length;
   };
 
+  // Updates the cards based on the search filter
   const filterCatalog = (e) => {
     // Prevent the browser from reloading the page
     e.preventDefault();
@@ -68,6 +60,7 @@ function Browse({ cart, setCart }) {
     setViewCatalog(updatedCatalog);
   };
 
+  // A list of visible product cards
   const shoppingItems = viewCatalog.map((item) => (
     <div className="col justify-content-center" key={item.id}>
       <div className="card w-100 h-100">
